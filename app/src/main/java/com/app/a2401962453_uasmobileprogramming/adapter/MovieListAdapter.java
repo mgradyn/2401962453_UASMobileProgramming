@@ -32,7 +32,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     @Override
     public MovieListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.movie_list_item, parent, false);
+                .inflate(R.layout.item_movie, parent, false);
         view.setClipToOutline(true);
         return new MovieListViewHolder(view);
     }
@@ -40,7 +40,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     @Override
     public void onBindViewHolder(@NonNull MovieListViewHolder holder, int position) {
         holder.tv_titleName.setText(movieList.get(position).getTitle());
-        holder.tv_description.setText(movieList.get(position).getOverview());
+//        holder.tv_description.setText(movieList.get(position).getOverview());
         Glide.with(context).
                 load("https://image.tmdb.org/t/p/w185" + movieList.get(position).getPosterPath()).
                 into(holder.iv_coverImage);
@@ -73,7 +73,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
             iv_coverImage = itemView.findViewById(R.id.iv_coverImage);
             tv_titleName = itemView.findViewById(R.id.tv_titleName);
-            tv_description = itemView.findViewById(R.id.tv_description);
+//            tv_description = itemView.findViewById(R.id.tv_description);
             parentLayout = itemView.findViewById(R.id.parentLayout);
         }
 

@@ -1,7 +1,8 @@
 package com.app.a2401962453_uasmobileprogramming.network;
 
+import com.app.a2401962453_uasmobileprogramming.model.Response;
+
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -12,6 +13,7 @@ public interface MovieApiInterface {
             @Path("category") String category,
             @Query("api_key") String api_key,
             @Query("language") String language,
-            @Query("age") int page
+            @Query("page") int page,
+            @Query("region") String region
     );
 }
