@@ -24,6 +24,7 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="8dp"
         tools:listitem="@layout/item_movie"
+        android:layout_marginBottom="50dp"
         tools:itemCount="3" />
 
 </RelativeLayout>
