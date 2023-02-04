@@ -63,9 +63,9 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(-6.193924061113853, 106.78813220277623)).title("Cinema\n" +
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(-6.193924061113853, 106.78813220277623)).title(
                 "CGP Alpha"));
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(-6.20175020412279, 106.78223868546155)).title("Cinema\n" +
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(-6.20175020412279, 106.78223868546155)).title(
                 "CGP Beta"));
         CameraPosition cinema = CameraPosition.builder().target(new LatLng(-6.193924061113853, 106.78813220277623)).zoom(16).bearing(0).tilt(45).build();
 
