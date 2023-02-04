@@ -10,10 +10,14 @@ public class CinemaRoom {
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("price")
+    @Expose
+    private Double price;
 
-    public CinemaRoom(String name, String image) {
+    public CinemaRoom(String name, String image, Double price) {
         this.name = name;
         this.image = image;
+        this.price = price;
     }
 
     public String getName() {
@@ -30,5 +34,9 @@ public class CinemaRoom {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Double getPrice() {
+        return price;
     }
 }

@@ -12,11 +12,11 @@ import java.util.List;
 
 public class DefaultList {
     public static final List<CinemaRoom> cinemaRoomList = Arrays.asList(
-            new CinemaRoom("Bronze", "cinema1"),
-            new CinemaRoom("Silver", "cinema2"),
-            new CinemaRoom("Gold", "cinema3"),
-            new CinemaRoom("Emerald", "cinema4"),
-            new CinemaRoom("Diamond", "cinema5")
+            new CinemaRoom("Bronze", "cinema1", 100.000),
+            new CinemaRoom("Silver", "cinema2", 210.000),
+            new CinemaRoom("Gold", "cinema3", 420.000),
+            new CinemaRoom("Emerald", "cinema4", 540.000),
+            new CinemaRoom("Diamond", "cinema5", 820.000)
     );
 
     public static final List<CinemaDate> cinemaDateList = Arrays.asList(

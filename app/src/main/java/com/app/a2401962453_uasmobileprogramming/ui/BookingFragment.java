@@ -81,6 +81,9 @@ public class BookingFragment extends Fragment implements OnRoomCardClickListener
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        binding.tvTotalPrice.setVisibility(View.GONE);
+        binding.tvPriceTitle.setVisibility(View.GONE);
+
         Glide.with(this).
                 load("https://image.tmdb.org/t/p/w500" + movieDetail.getPosterPath()).
                 into(binding.ivBackground);
@@ -209,8 +212,12 @@ public class BookingFragment extends Fragment implements OnRoomCardClickListener
     }
 
     @Override
-    public void onCardClick(String type) {
+    public void onCardClick(String type, Double price) {
         Log.d("roomType", type);
+        String priceText = "Rp. " + price.toString() + "00";
+        binding.tvTotalPrice.setText(priceText);
+        binding.tvPriceTitle.setVisibility(View.VISIBLE);
+        binding.tvTotalPrice.setVisibility(View.VISIBLE);
         this.roomType = type;
     }
 

@@ -74,7 +74,7 @@ public class CinemaRoomListAdapter extends RecyclerView.Adapter<CinemaRoomListAd
                 public void onClick(View view) {
                     int copyOfLastCheckedPosition = lastCheckedPosition;
                     lastCheckedPosition = getAdapterPosition();
-                    listener.onCardClick(cinemaRoomList.get(getAdapterPosition()).getName());
+                    listener.onCardClick(cinemaRoomList.get(getAdapterPosition()).getName(), cinemaRoomList.get(getAdapterPosition()).getPrice());
                     notifyItemChanged(copyOfLastCheckedPosition);
                     notifyItemChanged(lastCheckedPosition);
                 }
