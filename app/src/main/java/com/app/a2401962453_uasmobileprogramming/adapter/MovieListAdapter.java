@@ -2,6 +2,7 @@ package com.app.a2401962453_uasmobileprogramming.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.a2401962453_uasmobileprogramming.R;
@@ -22,10 +24,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     private Context context;
     private List<Result> movieList;
+    private Bundle bundle;
 
     public MovieListAdapter(Context context, List<Result> movieList) {
         this.context = context;
         this.movieList = movieList;
+        bundle = new Bundle();
     }
 
     @NonNull
@@ -40,22 +44,18 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     @Override
     public void onBindViewHolder(@NonNull MovieListViewHolder holder, int position) {
         holder.tv_titleName.setText(movieList.get(position).getTitle());
-//        holder.tv_description.setText(movieList.get(position).getOverview());
         Glide.with(context).
                 load("https://image.tmdb.org/t/p/w185" + movieList.get(position).getPosterPath()).
                 into(holder.iv_coverImage);
-//        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, DetailMovieActivity.class);
-//                Result result = new Result();
-//                result.setOriginalTitle(resultList.get(viewHolder.getAdapterPosition()).getOriginalTitle());
-//                result.setOverview(resultList.get(viewHolder.getAdapterPosition()).getOverview());
-//                result.setPosterPath(resultList.get(viewHolder.getAdapterPosition()).getPosterPath());
-//                intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, result);
-//                parent.getContext().startActivity(intent);
-//            }
-//        });
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               bundle.putParcelable("movieResult", movieList.get(holder.getAdapterPosition()));
+               Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_detailMovieFragment, bundle);
+           }
+       }
+        );
     }
 
     @Override
@@ -65,7 +65,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     public class MovieListViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_coverImage;
-        TextView tv_titleName, tv_description;
+        TextView tv_titleName;
         ConstraintLayout parentLayout;
 
         public MovieListViewHolder(@NonNull View itemView) {

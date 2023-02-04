@@ -2,4 +2,8 @@
     <string name="app_name">2401962453_UASMobileProgramming</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="cinema_locations">
+        <item>Cinema CGP Alpha</item>
+        <item>Cinema CGP Beta</item>
+    </string-array>
 </resources>

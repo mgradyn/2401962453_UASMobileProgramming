@@ -2,65 +2,83 @@ package com.app.a2401962453_uasmobileprogramming.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.a2401962453_uasmobileprogramming.R;
+import com.app.a2401962453_uasmobileprogramming.databinding.ActivityMainBinding;
+import com.app.a2401962453_uasmobileprogramming.databinding.FragmentDetailMovieBinding;
+import com.app.a2401962453_uasmobileprogramming.databinding.FragmentHomeBinding;
+import com.app.a2401962453_uasmobileprogramming.model.Result;
+import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DetailMovieFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DetailMovieFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DetailMovieFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DetailMovieFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DetailMovieFragment newInstance(String param1, String param2) {
-        DetailMovieFragment fragment = new DetailMovieFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentDetailMovieBinding binding;
+    BottomNavigationView bottomNavigationView;
+    private Result movieDetail;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (getArguments() != null) {
+            movieDetail = getArguments().getParcelable("movieResult");
+        }
+        else {
+            movieDetail = null;
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_movie, container, false);
+        binding = FragmentDetailMovieBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        Glide.with(this).
+                load("https://image.tmdb.org/t/p/w500" + movieDetail.getPosterPath()).
+                into(binding.ivBackground);
+        binding.tvTitle.setText(movieDetail.getTitle());
+        binding.tvRating.setText(movieDetail.getVoteAverage().toString());
+        binding.tvPopularityValue.setText(movieDetail.getPopularity().toString());
+        binding.tvSynopsisDetail.setText(movieDetail.getOverview());
+        binding.ivBack.setOnClickListener(
+                Navigation.createNavigateOnClickListener(R.id.action_detailMovieFragment_to_homeFragment)
+        );
+        binding.buttonBook.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Bundle bundle = new Bundle();
+               bundle.putParcelable("movieDetail",movieDetail);
+               Navigation.findNavController(view).navigate(R.id.action_detailMovieFragment_to_bookingFragment, bundle);
+           }
+        });
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        bottomNavigationView.setVisibility(View.GONE);
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        bottomNavigationView.setVisibility(View.VISIBLE);
+        super.onStop();
     }
 }
