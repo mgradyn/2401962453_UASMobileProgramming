@@ -203,7 +203,8 @@
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/btn_proceed"/>
 
         </RelativeLayout>
 
