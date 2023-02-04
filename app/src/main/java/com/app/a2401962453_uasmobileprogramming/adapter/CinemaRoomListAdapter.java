@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.a2401962453_uasmobileprogramming.R;
 import com.app.a2401962453_uasmobileprogramming.list.DefaultList;
 import com.app.a2401962453_uasmobileprogramming.model.CinemaRoom;
+import com.app.a2401962453_uasmobileprogramming.tool.OnRoomCardClickListener;
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
@@ -27,11 +28,13 @@ public class CinemaRoomListAdapter extends RecyclerView.Adapter<CinemaRoomListAd
     private Context context;
     private List<CinemaRoom> cinemaRoomList;
     private int lastCheckedPosition = -1;
+    OnRoomCardClickListener listener;
 
-    public CinemaRoomListAdapter(Context context) {
+    public CinemaRoomListAdapter(Context context, OnRoomCardClickListener listener) {
         this.context = context;
         this.cinemaRoomList = DefaultList.cinemaRoomList;
-        Log.d("cinemaRoomList", cinemaRoomList.toString());
+        this.listener = listener;
+
     }
 
     @NonNull
@@ -71,6 +74,7 @@ public class CinemaRoomListAdapter extends RecyclerView.Adapter<CinemaRoomListAd
                 public void onClick(View view) {
                     int copyOfLastCheckedPosition = lastCheckedPosition;
                     lastCheckedPosition = getAdapterPosition();
+                    listener.onCardClick(cinemaRoomList.get(getAdapterPosition()).getName());
                     notifyItemChanged(copyOfLastCheckedPosition);
                     notifyItemChanged(lastCheckedPosition);
                 }
