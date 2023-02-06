@@ -132,10 +132,10 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <VideoView
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#e2e2e2" />
+                    android:background="#121212" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/cinema_date_recycler_view"
@@ -147,11 +147,11 @@
                     tools:listitem="@layout/item_cinema_date"
                     tools:itemCount="1" />
 
-                <VideoView
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="16dp"
-                    android:background="#e2e2e2" />
+                    android:background="#121212" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -175,10 +175,10 @@
                     tools:listitem="@layout/item_cinema_time"
                     tools:itemCount="1" />
 
-                <VideoView
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#e2e2e2" />
+                    android:background="#121212" />
 
                 <TextView
                     android:layout_width="match_parent"

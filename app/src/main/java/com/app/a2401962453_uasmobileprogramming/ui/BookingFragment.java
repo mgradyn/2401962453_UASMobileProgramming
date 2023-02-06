@@ -1,5 +1,7 @@
 package com.app.a2401962453_uasmobileprogramming.ui;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,18 +27,23 @@ import com.app.a2401962453_uasmobileprogramming.R;
 import com.app.a2401962453_uasmobileprogramming.adapter.CinemaDateListAdapter;
 import com.app.a2401962453_uasmobileprogramming.adapter.CinemaRoomListAdapter;
 import com.app.a2401962453_uasmobileprogramming.adapter.CinemaTimeListAdapter;
+import com.app.a2401962453_uasmobileprogramming.database.AppDatabase;
+import com.app.a2401962453_uasmobileprogramming.database.DBReceiver;
 import com.app.a2401962453_uasmobileprogramming.databinding.FragmentBookingBinding;
 import com.app.a2401962453_uasmobileprogramming.model.CinemaDate;
 import com.app.a2401962453_uasmobileprogramming.model.CinemaTime;
 import com.app.a2401962453_uasmobileprogramming.model.Result;
+import com.app.a2401962453_uasmobileprogramming.model.Ticket;
 import com.app.a2401962453_uasmobileprogramming.tool.OnDateCardClickListener;
 import com.app.a2401962453_uasmobileprogramming.tool.OnRoomCardClickListener;
 import com.app.a2401962453_uasmobileprogramming.tool.OnTimeCardClickListener;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class BookingFragment extends Fragment implements OnRoomCardClickListener, OnDateCardClickListener, OnTimeCardClickListener {
     private FragmentBookingBinding binding;
@@ -48,13 +54,26 @@ public class BookingFragment extends Fragment implements OnRoomCardClickListener
     private CinemaDateListAdapter cinemaDateListAdapter;
     private CinemaTimeListAdapter cinemaTimeListAdapter;
 
+    private Ticket ticket = null;
     private String cinemaLocation = null;
     private String roomType = null;
+    private String roomPrice = null;
     private CinemaDate cinemaDate = null;
     private CinemaTime cinemaTime = null;
 
+    private DBReceiver dbreceiver;
+    private AppDatabase db;
+    private Bundle bundle;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        dbreceiver = (DBReceiver) context;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        bundle = new Bundle();
         super.onCreate(savedInstanceState);
 
     }
@@ -72,6 +91,8 @@ public class BookingFragment extends Fragment implements OnRoomCardClickListener
         cinemaRoomListAdapter = new CinemaRoomListAdapter((MainActivity)getActivity(), this);
         cinemaDateListAdapter = new CinemaDateListAdapter((MainActivity)getActivity(), this);
         cinemaTimeListAdapter = new CinemaTimeListAdapter((MainActivity)getActivity(), this);
+
+        db = dbreceiver.getDB();
 
         // Inflate the layout for this fragment
         binding = FragmentBookingBinding.inflate(getLayoutInflater());
@@ -142,8 +163,11 @@ public class BookingFragment extends Fragment implements OnRoomCardClickListener
                     makeToast("Please select another time");
                 }
                 else {
+                    ticket = new Ticket(movieDetail.getTitle(), cinemaLocation, roomType, roomPrice, generateDate(cinemaDate.getFullDate()), cinemaTime.getTime(), name, email);
+                    insertDB(ticket);
                     makeToast("Booking Success");
-                    Navigation.findNavController(view).navigate(R.id.action_bookingFragment_to_homeFragment);
+                    bundle.putParcelable("ticketDetail", ticket);
+                    Navigation.findNavController(view).navigate(R.id.action_bookingFragment_to_ticketFragment, bundle);
                 }
             }
         });
@@ -219,6 +243,7 @@ public class BookingFragment extends Fragment implements OnRoomCardClickListener
         binding.tvPriceTitle.setVisibility(View.VISIBLE);
         binding.tvTotalPrice.setVisibility(View.VISIBLE);
         this.roomType = type;
+        this.roomPrice = priceText;
     }
 
     @Override
@@ -246,5 +271,20 @@ public class BookingFragment extends Fragment implements OnRoomCardClickListener
 
     private boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
+
+    private String generateDate(Date fullDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("d MMM yyyy");
+        String strDate = formatter.format(fullDate);
+        return strDate;
+    }
+
+    private void insertDB(Ticket ticket) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.ticketDao().insertAll(ticket);
+            }
+        });
     }
 }

@@ -48,13 +48,15 @@ public class DetailMovieFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
-        Glide.with(this).
-                load("https://image.tmdb.org/t/p/w500" + movieDetail.getPosterPath()).
-                into(binding.ivBackground);
-        binding.tvTitle.setText(movieDetail.getTitle());
-        binding.tvRating.setText(movieDetail.getVoteAverage().toString());
-        binding.tvPopularityValue.setText(movieDetail.getPopularity().toString());
-        binding.tvSynopsisDetail.setText(movieDetail.getOverview());
+        if (movieDetail != null) {
+            Glide.with(this).
+                    load("https://image.tmdb.org/t/p/w500" + movieDetail.getPosterPath()).
+                    into(binding.ivBackground);
+            binding.tvTitle.setText(movieDetail.getTitle());
+            binding.tvRating.setText(movieDetail.getVoteAverage().toString());
+            binding.tvPopularityValue.setText(movieDetail.getPopularity().toString());
+            binding.tvSynopsisDetail.setText(movieDetail.getOverview());
+        }
         binding.ivBack.setOnClickListener(
                 Navigation.createNavigateOnClickListener(R.id.action_detailMovieFragment_to_homeFragment)
         );

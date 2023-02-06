@@ -40,5 +40,29 @@
         <action
             android:id="@+id/action_bookingFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_bookingFragment_to_ticketFragment"
+            app:destination="@id/ticketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketFragment"
+        android:name="com.app.a2401962453_uasmobileprogramming.ui.TicketFragment"
+        android:label="fragment_ticket"
+        tools:layout="@layout/fragment_ticket" >
+        <action
+            android:id="@+id/action_ticketFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_ticketFragment_to_ticketListFragment"
+            app:destination="@id/ticketListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketListFragment"
+        android:name="com.app.a2401962453_uasmobileprogramming.ui.TicketListFragment"
+        android:label="fragment_ticket_list"
+        tools:layout="@layout/fragment_ticket_list" >
+        <action
+            android:id="@+id/action_ticketListFragment_to_ticketFragment"
+            app:destination="@id/ticketFragment" />
     </fragment>
 </navigation>
