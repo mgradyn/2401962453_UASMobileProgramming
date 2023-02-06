@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     app:cardCornerRadius="20dp"
-    app:strokeColor="@color/gold"
-    app:strokeWidth="1dp"
+    app:cardElevation="2dp"
     android:id="@+id/mc_parent_layout"
     android:layout_marginHorizontal="6dp"
     android:layout_marginVertical="6dp"
@@ -32,7 +31,7 @@
                 app:cardCornerRadius="10dp"
                 >
                 <TextView
-                    android:id="@+id/tv_movieName"
+                    android:id="@+id/tv_movieTicketName"
                     android:layout_gravity="center"
                     android:textAlignment="center"
                     android:layout_width="wrap_content"
@@ -57,10 +56,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:text="Cinema"
                 tools:text="Cinema" />
 
             <TextView
-                android:id="@+id/tv_cinema_value"
+                android:id="@+id/tv_ticket_cinema_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -86,10 +86,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:textSize="16sp"
-                tools:text="Time" />
+                android:text="Time" />
 
             <TextView
-                android:id="@+id/tv_time_value"
+                android:id="@+id/tv_ticket_time_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"

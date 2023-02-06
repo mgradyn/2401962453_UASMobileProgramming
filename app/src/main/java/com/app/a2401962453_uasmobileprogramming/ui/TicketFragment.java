@@ -48,7 +48,7 @@ public class TicketFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         binding.btnOk.setOnClickListener(
-                Navigation.createNavigateOnClickListener(R.id.action_ticketFragment_to_ticketListFragment)
+                Navigation.createNavigateOnClickListener(R.id.action_ticketFragment_to_homeFragment)
         );
         if (ticket != null) {
             binding.tvMovieName.setText(ticket.getMovieName());

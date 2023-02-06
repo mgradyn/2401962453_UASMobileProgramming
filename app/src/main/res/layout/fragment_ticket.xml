@@ -69,7 +69,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="16sp"
-                                    tools:text="Thu" />
+                                    android:text="Date"
+                                    android:id="@+id/tv_day"/>
 
                                 <TextView
                                     android:id="@+id/tv_date_value"
@@ -97,7 +98,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="16sp"
-                                    tools:text="Cinema" />
+                                    android:text="Cinema" />
 
                                 <TextView
                                     android:id="@+id/tv_cinema_value"
@@ -126,7 +127,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="12dp"
                                     android:textSize="16sp"
-                                    tools:text="Time" />
+                                    android:text="Time" />
 
                                 <TextView
                                     android:id="@+id/tv_time_value"

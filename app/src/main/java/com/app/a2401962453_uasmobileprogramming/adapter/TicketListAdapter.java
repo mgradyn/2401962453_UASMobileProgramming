@@ -68,10 +68,10 @@ public class TicketListAdapter extends RecyclerView.Adapter<TicketListAdapter.Ti
         public TicketListViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tv_movieName = itemView.findViewById(R.id.tv_movieName);
-            tv_cinema_value = itemView.findViewById(R.id.tv_cinema_value);
-            tv_time_value = itemView.findViewById(R.id.tv_time_value);
-            parentLayout = itemView.findViewById(R.id.parentLayout);
+            tv_movieName = itemView.findViewById(R.id.tv_movieTicketName);
+            tv_cinema_value = itemView.findViewById(R.id.tv_ticket_cinema_value);
+            tv_time_value = itemView.findViewById(R.id.tv_ticket_time_value);
+            parentLayout = itemView.findViewById(R.id.mc_parent_layout);
         }
 
 
