@@ -211,13 +211,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="#f7f7f7">
+            android:layout_alignParentBottom="true">
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#80D1D1D1" />
+                android:layout_height="1dp" />
 
 
             <Button
